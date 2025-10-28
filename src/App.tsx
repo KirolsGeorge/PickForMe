@@ -1,13 +1,15 @@
 // import { useState } from 'react'
 import Header from './Componants/Header';
-import AddButoon from './Componants/addButoon';
+import Items from './Componants/Items';
+import LetsGo from './Componants/LetsGo';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between bg-linear-to-br from-blue-800 to-fuchsia-700 font-autour">
+    <div className="min-h-screen flex flex-col items-center justify-between bg-black font-autour gap-5 max-w-4xl p-4 sm:px-6 lg:px-8">
       <Header />
-      <main className="flex flex-col items-center justify-center flex-1 w-full max-w-4xl px-4 sm:px-6 lg:px-8">
-        <AddButoon />
+      <main className="flex flex-col items-center justify-between flex-1 w-full gap-3">
+        <Items />
+        <LetsGo />
       </main>
     </div>
   );
