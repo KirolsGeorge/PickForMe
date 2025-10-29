@@ -7,7 +7,7 @@ function App() {
   useAppHeight();
 
   return (
-    <div className="min-h-[calc(var(--app-height))] flex-1 flex flex-col items-center justify-between font-autour gap-4 w-full p-4 sm:px-6 lg:px-8 overscroll-none">
+    <div className="min-h-[calc(var(--app-height))] flex flex-col items-center justify-between font-autour gap-4 w-full p-4 sm:px-6 lg:px-8 overscroll-none">
       <Header />
       <main className="flex flex-col items-center justify-between flex-1 w-full gap-3 overflow-scroll">
         <Items />

@@ -53,7 +53,7 @@ export default function Items() {
     : null;
 
   return (
-    <div className="flex flex-col gap-3 w-full overflow-y-auto">
+    <div className="flex flex-col gap-3 w-full">
       {/* Header + counter */}
       <div className="flex items-center justify-between">
         <h2 className="text-white font-semibold">Items</h2>
