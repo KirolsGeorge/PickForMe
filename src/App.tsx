@@ -40,7 +40,7 @@ function App() {
     }, []);
 
   return (
-    <div className="h-[calc(var(--vh,3vh)*110)] sm:h-screen flex flex-col items-center justify-between font-autour gap-4 w-full p-4 sm:px-6 lg:px-8 overscroll-none">
+    <div className="h-[calc(var(--vh,1vh)*100)] sm:h-screen flex flex-col items-center justify-between font-autour gap-4 w-full p-4 sm:px-6 lg:px-8 overscroll-none">
       <Header />
       <main className="flex flex-col items-center justify-between flex-1 w-full gap-3 overflow-scroll">
         <Items />
