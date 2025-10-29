@@ -1,59 +1,83 @@
-import { useEffect } from 'react';
-import Header from './Componants/Header';
-import Items from './Componants/Items';
-import LetsGo from './Componants/LetsGo';
+import { useEffect, useState } from 'react';
+import HomePage from './Componants/Pages/homePage';
+import SpinnerPage from './Componants/Pages/spinningPage';
 
 function App() {
-    useEffect(() => {
-      function setVH(): void {
-        window.requestAnimationFrame(() => {
-          const vh = window.innerHeight * 0.01;
-          document.documentElement.style.setProperty('--vh', `${vh}px`);
-        });
+  useEffect(() => {
+    function setVH(): void {
+      window.requestAnimationFrame(() => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      });
+    }
+
+    let lastHeight: number = window.innerHeight;
+    let vhCheckTimer: number | null = null;
+
+    function watchVHChanges(): void {
+      if (vhCheckTimer !== null) {
+        clearTimeout(vhCheckTimer);
       }
-
-      let lastHeight: number = window.innerHeight;
-      let vhCheckTimer: number | null = null;
-
-      function watchVHChanges(): void {
-        if (vhCheckTimer !== null) {
-          clearTimeout(vhCheckTimer);
+      vhCheckTimer = window.setTimeout(() => {
+        if (window.innerHeight !== lastHeight) {
+          lastHeight = window.innerHeight;
+          setVH();
         }
-        vhCheckTimer = window.setTimeout(() => {
-          if (window.innerHeight !== lastHeight) {
-            lastHeight = window.innerHeight;
-            setVH();
-          }
-        }, 150);
-      }
+      }, 150);
+    }
 
-      // Initialize and add listeners
-      setVH();
-      window.addEventListener('resize', watchVHChanges);
-      window.addEventListener('orientationchange', watchVHChanges);
+    // Initialize and add listeners
+    setVH();
+    window.addEventListener('resize', watchVHChanges);
+    window.addEventListener('orientationchange', watchVHChanges);
 
-      // Cleanup on unmount
-      return () => {
-        window.removeEventListener('resize', watchVHChanges);
-        window.removeEventListener('orientationchange', watchVHChanges);
-      };
-    }, []);
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener('resize', watchVHChanges);
+      window.removeEventListener('orientationchange', watchVHChanges);
+    };
+  }, []);
+
+  const [page, setPage] = useState<1 | 2>(1);
+
+  const goNext = () => setPage(2);
+  const goBack = () => setPage(1);
 
   return (
-    <div className="h-[calc(var(--vh,1vh)*100)] sm:h-screen flex flex-col items-center justify-between font-autour gap-4 w-full p-4 sm:px-6 lg:px-8 overscroll-none">
-      <Header />
-      <main className="flex flex-col items-center justify-between flex-1 w-full gap-3 overflow-scroll">
-        <Items />
-      </main>
-      <LetsGo />
+    <div className="relative h-[calc(var(--vh,1vh)*100)] sm:h-screen w-full p-4 sm:px-6 lg:px-8 font-autour overscroll-none">
+      {/* PAGE 1 — stays mounted */}
+      <section
+        aria-hidden={page !== 1}
+        className={`absolute inset-0 flex flex-col gap-4 p-4 sm:px-6 lg:px-8
+                    ${
+                      page === 1
+                        ? 'opacity-100 pointer-events-auto'
+                        : 'opacity-0 pointer-events-none'
+                    }
+                    transition-opacity duration-300`}
+      >
+        {/* HomePage should internally render its header, main and a button that calls goNext */}
+        <HomePage goNext={goNext} />
+      </section>
+
+      {/* PAGE 2 — stays mounted */}
+      <section
+        aria-hidden={page !== 2}
+        className={`absolute inset-0 flex flex-col gap-4 p-4 sm:px-6 lg:px-8
+                    ${
+                      page === 2
+                        ? 'opacity-100 pointer-events-auto'
+                        : 'opacity-0 pointer-events-none'
+                    }
+                    transition-opacity duration-300`}
+      >
+        {/* SpinnerPage should internally render its header, main and a Back button that calls goBack */}
+        <SpinnerPage goBack={goBack} />
+      </section>
     </div>
   );
 }
 
 export default App;
-
-
-
-
 
 

@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
-export default function Items() {
-  // keep it simple: string[] only
-  const [items, setItems] = useState<string[]>(['Primos Pizza', 'Prokar']);
+type Props = {
+  items: string[];
+  setItems: React.Dispatch<React.SetStateAction<string[]>>;
+};
 
+export default function Items({ items, setItems }: Props) {
   // constants
   const MIN = 2;
   const MAX = 8;
@@ -56,8 +58,7 @@ export default function Items() {
     <div className="flex flex-col gap-3 w-full">
       {/* Header + counter */}
       <div className="flex items-center justify-between">
-        <h2 className="text-white font-semibold">Items</h2>
-        <span className="text-sm text-gray-400">
+        <span className="text-sm text-gray-400 text-right w-full">
           {Math.min(items.length, MAX)}/{MAX}
         </span>
       </div>
@@ -102,7 +103,7 @@ export default function Items() {
       </div>
 
       {/* Validation / error */}
-      {errorMsg && (
+      {/* {errorMsg && (
         <div
           id={`${listIdRef.current}-error`}
           className="flex items-center justify-between bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg px-3 py-2"
@@ -110,7 +111,7 @@ export default function Items() {
         >
           <p className="text-sm">{errorMsg}</p>
         </div>
-      )}
+      )} */}
 
       {/* Add button */}
       <button
