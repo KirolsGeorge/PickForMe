@@ -55,16 +55,16 @@ export function SpinnerPage({ goBack, items }: PropsSpinnerPage) {
           <input
             type="number"
             className="grow text-white placeholder:text-gray-500 focus-visible:outline-none bg-gray-800 p-4 rounded-xl border-none w-full"
-            placeholder="Spinning Time (From 1 to 10)"
+            placeholder="Values out ( 1 - 10 ) are ignored."
             min={1}
             max={10}
-            onChange={(e) =>
+            onChange={(e) => {
               e.target.value &&
               Number(e.target.value) <= 10 &&
               Number(e.target.value) >= 1
                 ? setSpinningTime(Number(e.target.value))
-                : setSpinningTime(3)
-            }
+                : setSpinningTime(3);
+            }}
           />
         </div>
         <SpinnerWheel items={items} spinDuration={spinningTime || 3} />

@@ -102,17 +102,6 @@ export default function Items({ items, setItems }: Props) {
         ))}
       </div>
 
-      {/* Validation / error */}
-      {/* {errorMsg && (
-        <div
-          id={`${listIdRef.current}-error`}
-          className="flex items-center justify-between bg-red-500/10 border border-red-500/30 text-red-400 rounded-lg px-3 py-2"
-          role="alert"
-        >
-          <p className="text-sm">{errorMsg}</p>
-        </div>
-      )} */}
-
       {/* Add button */}
       <button
         type="button"
