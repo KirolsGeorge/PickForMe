@@ -1,8 +1,9 @@
 import Header from '../Header';
 import Items from '../Items';
 import LetsGo from '../LetsGo';
-import SpinnerWheel from '../spinnerWheel';
+import SpeedButton from './pagesComponants';
 import { useState } from 'react';
+// import SpinnerWheel from '../spinnerWheel';
 
 type PropsHomePage = {
   goNext: () => void;
@@ -43,31 +44,28 @@ export function HomePage({ goNext, items, setItems }: PropsHomePage) {
   );
 }
 
-export function SpinnerPage({ goBack, items }: PropsSpinnerPage) {
-  const [spinningTime, setSpinningTime] = useState(0);
+export function SpinnerPage({ goBack }: PropsSpinnerPage) {
+  // const [spinningTime, setSpinningTime] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const speeds = ['1x', '2x', '3x'];
 
   return (
     <>
       <Header type="spinner" backHandler={goBack} />
-      <main className="flex flex-col items-center justify-center flex-1 w-full overflow-scroll gap-10 scrollbar-hide">
-        <div className="flex flex-col items-center justify-between w-full gap-2">
-          <p className="text-white">Set The Time OR Just Hit Spin!</p>
-          <input
-            type="number"
-            className="grow text-white placeholder:text-gray-500 focus-visible:outline-none bg-gray-800 p-4 rounded-xl border-none w-full"
-            placeholder="Values out ( 1 - 10 ) are ignored."
-            min={1}
-            max={10}
-            onChange={(e) => {
-              e.target.value &&
-              Number(e.target.value) <= 10 &&
-              Number(e.target.value) >= 1
-                ? setSpinningTime(Number(e.target.value))
-                : setSpinningTime(3);
-            }}
-          />
+      <main className="flex flex-col items-center flex-1 w-full overflow-scroll gap-10 scrollbar-hide">
+        <div className="flex items-center justify-between w-full gap-5 mt-10">
+         {speeds.map((speed, index) => (
+            <SpeedButton
+              key={speed}
+              active={activeIndex === index}
+              onClick={() => setActiveIndex(index)}
+            >
+              {speed}
+            </SpeedButton>
+          ))}
         </div>
-        <SpinnerWheel items={items} spinDuration={spinningTime || 3} />
+        {/* <SpinnerWheel items={items} /> */}
       </main>
     </>
   );

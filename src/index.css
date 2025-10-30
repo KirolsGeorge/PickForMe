@@ -5,7 +5,7 @@
 @plugin "daisyui";
 
 @theme {
-  --font-autour: 'Autour One', cursive;
+  /* --font-autour: 'Autour One', cursive; */
 }
 
 @layer base {
@@ -24,10 +24,13 @@
   }
   #root {
     overflow: scroll;
-    @apply bg-black;
+    @apply bg-[#10151f];
   }
   a {
     @apply text-sky-600 hover:text-sky-500 underline underline-offset-2;
+  }
+  .active {
+    @apply bg-[#eb5131];
   }
 }
 

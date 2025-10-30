@@ -37,7 +37,16 @@ function App() {
     };
   }, []);
 
-  const [items, setItems] = useState<string[]>(['Primos Pizza', 'Prokar']);
+  const [items, setItems] = useState<string[]>([
+    'Primos Pizza',
+    'Prokar',
+    'Primos Pizza',
+    'Prokar',
+    'Primos Pizza',
+    'Prokar',
+    'Primos Pizza',
+    'Prokar',
+  ]);
 
   const [page, setPage] = useState<1 | 2>(1);
 
@@ -45,8 +54,7 @@ function App() {
   const goBack = () => setPage(1);
 
   return (
-    <div className="relative h-[calc(var(--vh,1vh)*100)] sm:h-screen w-full max-w-4xl p-4 sm:px-6 lg:px-8 font-autour overscroll-none ">
-      {/* PAGE 1 — stays mounted */}
+    <div className="relative h-[calc(var(--vh,1vh)*100)] sm:h-screen w-full max-w-4xl p-4 sm:px-6 lg:px-8 overscroll-none ">
       <section
         aria-hidden={page !== 1}
         className={`absolute inset-0 flex flex-col gap-4 p-4 sm:px-6 lg:px-8
@@ -57,11 +65,9 @@ function App() {
                     }
                     transition-opacity duration-300`}
       >
-        {/* HomePage should internally render its header, main and a button that calls goNext */}
         <HomePage goNext={goNext} items={items} setItems={setItems} />
       </section>
 
-      {/* PAGE 2 — stays mounted */}
       <section
         aria-hidden={page !== 2}
         className={`absolute inset-0 flex flex-col gap-4 p-4 sm:px-6 lg:px-8
@@ -72,7 +78,6 @@ function App() {
                     }
                     transition-opacity duration-300`}
       >
-        {/* SpinnerPage should internally render its header, main and a Back button that calls goBack */}
         <SpinnerPage goBack={goBack} items={items} />
       </section>
     </div>
