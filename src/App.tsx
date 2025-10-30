@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import HomePage from './Componants/Pages/homePage';
-import SpinnerPage from './Componants/Pages/spinningPage';
+import { HomePage, SpinnerPage } from './Componants/Pages/pages';
 
 function App() {
   useEffect(() => {
@@ -38,13 +37,15 @@ function App() {
     };
   }, []);
 
+  const [items, setItems] = useState<string[]>(['Primos Pizza', 'Prokar']);
+
   const [page, setPage] = useState<1 | 2>(1);
 
   const goNext = () => setPage(2);
   const goBack = () => setPage(1);
 
   return (
-    <div className="relative h-[calc(var(--vh,1vh)*100)] sm:h-screen w-full p-4 sm:px-6 lg:px-8 font-autour overscroll-none">
+    <div className="relative h-[calc(var(--vh,1vh)*100)] sm:h-screen w-full max-w-4xl p-4 sm:px-6 lg:px-8 font-autour overscroll-none ">
       {/* PAGE 1 — stays mounted */}
       <section
         aria-hidden={page !== 1}
@@ -57,7 +58,7 @@ function App() {
                     transition-opacity duration-300`}
       >
         {/* HomePage should internally render its header, main and a button that calls goNext */}
-        <HomePage goNext={goNext} />
+        <HomePage goNext={goNext} items={items} setItems={setItems} />
       </section>
 
       {/* PAGE 2 — stays mounted */}
@@ -72,12 +73,11 @@ function App() {
                     transition-opacity duration-300`}
       >
         {/* SpinnerPage should internally render its header, main and a Back button that calls goBack */}
-        <SpinnerPage goBack={goBack} />
+        <SpinnerPage goBack={goBack} items={items} />
       </section>
     </div>
   );
 }
 
 export default App;
-
 

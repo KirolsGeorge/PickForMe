@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'tailwind-scrollbar-hide/v4';
 @import url('https://fonts.googleapis.com/css2?family=Autour+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 @plugin "daisyui";
@@ -18,6 +19,8 @@
     align-items: center;
     justify-content: center;
     @apply m-0 p-0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   #root {
     overflow: scroll;
